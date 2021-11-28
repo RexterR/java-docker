@@ -1,26 +1,35 @@
-version: "3.8"
+version: "3"
 services:
   jav:
-    restart: always
-    image: jav
+    # restart: always
+    build:
+      context: .
+    networks:
+      - sqlnet
     ports:
       - "8080:8080"
-    expose:
-      - "8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/db_example?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+      SPRING_DATASOURCE_USERNAME: springuser
+      SPRING_DATASOURCE_PASSWORD: ThePassword
     depends_on:
-      - mysql
+      - mysqldb
   
-  mysql:
+  mysqldb:
+    container_name: mysql
     image: mysql:8.0
     restart: always
     ports:
       - "3306:3306"
-    expose:
-      - "3306"
+    networks:
+      - sqlnet
     environment:
       - MYSQL_USER=springuser
       - MYSQL_PASSWORD=ThePassword
       - MYSQL_DATABASE=db_example
       - MYSQL_ROOT_PASSWORD=root
-    volumes:
-      - "./conf.d:/etc/mysql/conf.d:ro"
+    # volumes:
+    #   - "./conf.d:/etc/mysql/conf.d:ro"
+networks:
+  sqlnet:
+    driver: bridge
