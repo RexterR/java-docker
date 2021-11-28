@@ -6,17 +6,18 @@ services:
       context: .
     networks:
       - sqlnet
+
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/db_example?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=GMT
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db_example?autoReconnect=true&failOverReadOnly=false&maxReconnects=50
       SPRING_DATASOURCE_USERNAME: springuser
       SPRING_DATASOURCE_PASSWORD: ThePassword
     depends_on:
       - mysqldb
   
   mysqldb:
-    container_name: mysql
+    container_name: db
     image: mysql:8.0
     restart: always
     ports:
