@@ -1,36 +1,32 @@
-version: "3"
+version: "3.9"
 services:
   jav:
     # restart: always
+    image: jav
     build:
       context: .
-    networks:
-      - sqlnet
-
+    # networks:
+    #   - sqlnet
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/db_example?autoReconnect=true&failOverReadOnly=false&maxReconnects=50
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/db_example?autoReconnect=true&failOverReadOnly=false&maxReconnects=50
       SPRING_DATASOURCE_USERNAME: springuser
       SPRING_DATASOURCE_PASSWORD: ThePassword
     depends_on:
       - mysqldb
   
   mysqldb:
-    container_name: db
     image: mysql:8.0
     restart: always
     ports:
       - "3306:3306"
-    networks:
-      - sqlnet
+    # networks:
+    #   - sqlnet
     environment:
       - MYSQL_USER=springuser
       - MYSQL_PASSWORD=ThePassword
       - MYSQL_DATABASE=db_example
       - MYSQL_ROOT_PASSWORD=root
-    # volumes:
-    #   - "./conf.d:/etc/mysql/conf.d:ro"
-networks:
-  sqlnet:
-    driver: bridge
+    volumes:
+      - "./conf.d:/etc/mysql/conf.d:ro"
