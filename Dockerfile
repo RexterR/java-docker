@@ -1,7 +1,9 @@
-FROM openjdk:11
+FROM tomcat:8.0
 
-COPY ./target/accessing-data-mysql-complete-0.0.1-SNAPSHOT.jar accessing-data-mysql-complete-0.0.1-SNAPSHOT.jar
+RUN rm -rf /usr/local/tomcat/webapps/*
 
-CMD ["java","-jar","accessing-data-mysql-complete-0.0.1-SNAPSHOT.jar"]
+COPY ./target/accessing-data-mysql-complete-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/myapp.war
+
+# CMD ["catalina.sh","run"]
 
 EXPOSE 8080
