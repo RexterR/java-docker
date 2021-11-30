@@ -46,3 +46,8 @@ docker swarm init
 ```bash
 docker stack deploy --compose-file=docker-compose.yml spring_sql
 ```
+To fetch prebuilt image 
+```bash
+docker pull rdsuman/jav
+```
+[Docker Hub Image](https://hub.docker.com/repository/docker/rdsuman/jav)
