@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   jav:
-    image: jav
+    image: rdsuman/jav
     build:
       context: .
     ports:
