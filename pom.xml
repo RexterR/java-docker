@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>accessing-data-mysql-complete</artifactId>
+	<artifactId>spring-boot-starter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>accessing-data-mysql-complete</name>
-	<description>Demo project for Spring Boot</description>
+	<name>spring-boot-starter</name>
+	<description>Demo Spring Boot App</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
