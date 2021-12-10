@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   spring:
-    image: spring_micro
+    image: rdsuman/jav
     build:
       context: .
     ports:
